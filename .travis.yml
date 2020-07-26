@@ -1,0 +1,43 @@
+language: cpp
+
+os: linux
+
+dist: bionic
+
+cache:
+  directories:
+  - ${HOME}/PawPawBuilds/debs
+  - ${HOME}/PawPawBuilds/downloads
+
+jobs:
+    # linux with win32 cross-compilation
+    - os: linux
+      compiler: gcc
+      env:
+        - TARGET="win32"
+      services:
+        - xvfb
+
+    # linux with win64 cross-compilation
+    - os: linux
+      compiler: gcc
+      env:
+        - TARGET="win64"
+      services:
+        - xvfb
+
+    # macOS native build
+    - os: osx
+      compiler: gcc
+      env:
+        - TARGET="macos"
+
+before_install:
+  - bash ${TRAVIS_BUILD_DIR}/.travis/before_install.sh
+
+install:
+  - bash ${TRAVIS_BUILD_DIR}/.travis/install.sh
+
+script:
+  - bash ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap.sh ${TARGET}
+  #- bash ${TRAVIS_BUILD_DIR}/PawPaw/build-qt.sh ${TARGET}

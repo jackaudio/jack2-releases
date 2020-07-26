@@ -1,0 +1,3 @@
+[submodule "PawPaw"]
+	path = PawPaw
+	url = https://github.com/DISTRHO/PawPaw.git
