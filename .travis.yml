@@ -13,6 +13,10 @@ cache:
     - ${HOME}/PawPawBuilds/targets/win32
     - ${HOME}/PawPawBuilds/targets/win64
 
+env:
+  - JACK2_VERSION=34fb7b6963864380cf1ab48fe575faed62afd2f0
+  - QJACKCTL_VERSION+0.6.2
+
 jobs:
   # linux with win32 cross-compilation
   - os: linux
@@ -44,6 +48,6 @@ install:
 
 script:
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap.sh ${TARGET}
-  - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/build-qt.sh ${TARGET}
+  - bash ${TRAVIS_BUILD_DIR}/PawPaw/build-jack.sh ${TARGET} y
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
