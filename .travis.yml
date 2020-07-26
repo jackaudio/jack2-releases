@@ -6,35 +6,35 @@ dist: bionic
 
 cache:
   directories:
-  - ${HOME}/PawPawBuilds/builds
-  - ${HOME}/PawPawBuilds/debs
-  - ${HOME}/PawPawBuilds/downloads
-  - ${HOME}/PawPawBuilds/targets/macos
-  - ${HOME}/PawPawBuilds/targets/win32
-  - ${HOME}/PawPawBuilds/targets/win64
+    - ${HOME}/PawPawBuilds/builds
+    - ${HOME}/PawPawBuilds/debs
+    - ${HOME}/PawPawBuilds/downloads
+    - ${HOME}/PawPawBuilds/targets/macos
+    - ${HOME}/PawPawBuilds/targets/win32
+    - ${HOME}/PawPawBuilds/targets/win64
 
 jobs:
-    # linux with win32 cross-compilation
-    - os: linux
-      compiler: gcc
-      env:
-        - TARGET="win32"
-      services:
-        - xvfb
+  # linux with win32 cross-compilation
+  - os: linux
+    compiler: gcc
+    env:
+      - TARGET="win32"
+    services:
+      - xvfb
 
-    # linux with win64 cross-compilation
-    - os: linux
-      compiler: gcc
-      env:
-        - TARGET="win64"
-      services:
-        - xvfb
+  # linux with win64 cross-compilation
+  - os: linux
+    compiler: gcc
+    env:
+      - TARGET="win64"
+    services:
+      - xvfb
 
-    # macOS native build
-    - os: osx
-      compiler: gcc
-      env:
-        - TARGET="macos"
+  # macOS native build
+  - os: osx
+    compiler: gcc
+    env:
+      - TARGET="macos"
 
 before_install:
   - bash ${TRAVIS_BUILD_DIR}/.travis/before_install.sh
@@ -45,4 +45,5 @@ install:
 script:
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
-  #- bash ${TRAVIS_BUILD_DIR}/PawPaw/build-qt.sh ${TARGET}
+  - bash ${TRAVIS_BUILD_DIR}/PawPaw/build-qt.sh ${TARGET}
+  - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
