@@ -15,7 +15,7 @@ cache:
 
 env:
   - JACK2_VERSION=34fb7b6963864380cf1ab48fe575faed62afd2f0
-  - QJACKCTL_VERSION+0.6.2
+  - QJACKCTL_VERSION=0.6.2
 
 jobs:
   # linux with win32 cross-compilation
