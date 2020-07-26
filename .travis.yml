@@ -13,15 +13,13 @@ cache:
     - ${HOME}/PawPawBuilds/targets/win32
     - ${HOME}/PawPawBuilds/targets/win64
 
-env:
-  - JACK2_VERSION=34fb7b6963864380cf1ab48fe575faed62afd2f0
-  - QJACKCTL_VERSION=0.6.2
-
 jobs:
   # linux with win32 cross-compilation
   - os: linux
     compiler: gcc
     env:
+      - JACK2_VERSION=34fb7b6963864380cf1ab48fe575faed62afd2f0
+      - QJACKCTL_VERSION=0.6.2
       - TARGET="win32"
     services:
       - xvfb
@@ -30,6 +28,8 @@ jobs:
   - os: linux
     compiler: gcc
     env:
+      - JACK2_VERSION=34fb7b6963864380cf1ab48fe575faed62afd2f0
+      - QJACKCTL_VERSION=0.6.2
       - TARGET="win64"
     services:
       - xvfb
@@ -38,6 +38,8 @@ jobs:
   - os: osx
     compiler: gcc
     env:
+      - JACK2_VERSION=34fb7b6963864380cf1ab48fe575faed62afd2f0
+      - QJACKCTL_VERSION=0.6.2
       - TARGET="macos"
 
 before_install:
