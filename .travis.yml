@@ -18,8 +18,6 @@ jobs:
   - os: linux
     compiler: gcc
     env:
-      - JACK2_VERSION=34fb7b6963864380cf1ab48fe575faed62afd2f0
-      - QJACKCTL_VERSION=0.6.2
       - TARGET="win32"
     services:
       - xvfb
@@ -28,8 +26,6 @@ jobs:
   - os: linux
     compiler: gcc
     env:
-      - JACK2_VERSION=34fb7b6963864380cf1ab48fe575faed62afd2f0
-      - QJACKCTL_VERSION=0.6.2
       - TARGET="win64"
     services:
       - xvfb
@@ -38,8 +34,6 @@ jobs:
   - os: osx
     compiler: gcc
     env:
-      - JACK2_VERSION=34fb7b6963864380cf1ab48fe575faed62afd2f0
-      - QJACKCTL_VERSION=0.6.2
       - TARGET="macos"
 
 before_install:
@@ -50,6 +44,8 @@ install:
 
 script:
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap.sh ${TARGET}
+  - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/build-qt.sh ${TARGET}
-  - bash ${TRAVIS_BUILD_DIR}/PawPaw/build-jack.sh ${TARGET} y
+  - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
+  - bash ${TRAVIS_BUILD_DIR}/build-jack-helper.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
