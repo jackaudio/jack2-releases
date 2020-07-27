@@ -47,7 +47,7 @@ script:
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/build-qt.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
-  #- rm -f ${TRAVIS_BUILD_DIR}/PawPaw/targets/${TARGET}/lib/pkgconfig/jack.pc
+  - rm -f ${TRAVIS_BUILD_DIR}/PawPaw/targets/${TARGET}/lib/pkgconfig/jack.pc
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/build-jack.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
 
