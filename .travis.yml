@@ -48,7 +48,6 @@ script:
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/build-qt.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
   - rm -rf ${HOME}/PawPawBuilds/builds/win32/portaudio19-19.6.0
-  - rm -rf ${HOME}/PawPawBuilds/builds/win32/rtaudio-e03448bd15c1c34e842459939d755f5f89e880ed
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/build-jack.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
 
