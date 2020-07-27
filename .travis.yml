@@ -47,11 +47,11 @@ script:
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-qt.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
-  - rm -rf ${HOME}/PawPawBuilds/targets/win32/qjackctl-0.6.2
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/build-jack2.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
 
 before_deploy:
+  - rm -rf ${HOME}/PawPawBuilds/builds/${TARGET}/qjackctl-0.6.2
   - bash ${TRAVIS_BUILD_DIR}/pack-jack2-version.sh ${TARGET}
 
 deploy:
