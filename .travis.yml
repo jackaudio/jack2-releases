@@ -47,5 +47,19 @@ script:
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/build-qt.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
-  - bash ${TRAVIS_BUILD_DIR}/build-jack-helper.sh ${TARGET}
+  - bash ${TRAVIS_BUILD_DIR}/PawPaw/build-jack.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
+
+before_deploy:
+  - bash ${TRAVIS_BUILD_DIR}/build-jack-helper.sh ${TARGET}
+
+deploy:
+  provider: releases
+  api_key:
+    secure: "xKXvMWEvj92IsFINpGlYEJeidLRoTeLIwrWVO06UrNNVCPiWC9z64Xthx/0xqQEv+2PA5GLkh9lnTm7aqQKbMNiVj4sQCcg3sVXEhkGkr27KNjHuQiFao+IeotU6bVTObzGhNR+US3LkRK9RSSvnmDBSUQB16+YgG6PZyXH7mQfoLycQQ8z24hLc4P2gGXbgd23viqZVxBh15HBm8jSm0q5Y5JZ2D/ETQWIijv+Cd7f3Q4j989Q4ZULiDyPs6gMR6Klr85Z8iNXEZRCw/dJ800IrWV9tetJFZFVOG2nWATPSFD9L1DLlJtD0tPJjk/n7DpUEivdrrLgm2C1MaTfDWQU7OOktkcNv6oUB++hWqD/d9bj1teSu9lrUkAS4QPWGWgsMQH/eWquoS6vQOE7ERAHTDgbsS1aPxnuWyG2lyefbSEJCXBOpbcWLAfAr3cdkS+QhFHZzKvZLwJZFkKR0FEKKPkt+CViLmtSbeM7uFRhX3B4uA9EByZonlvupgKfyt/WKoqpsb1hF16tVrZOmTFf2/btLOw8PUD1opAx0aXjH+XcWH6y93wsP41E3VMO/gc8jc7npa+JsMDXaHFf/DMQvj9rVF8deHoshx8Sl3n0RpEhMyV+lXKKfewryqnfWNGak7wNQQhFr4Xqv6mleBFAX1Miy12KkzYxltfwi53o="
+  file_glob: true
+  file:
+    - PawPaw/jack2/macosx/*.pkg
+  skip_cleanup: true
+  on:
+    all_branches: true
