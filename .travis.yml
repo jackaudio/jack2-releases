@@ -43,15 +43,15 @@ install:
   - bash ${TRAVIS_BUILD_DIR}/.travis/install.sh
 
 script:
-  - bash ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap.sh ${TARGET}
+  - bash ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-jack2.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
-  - bash ${TRAVIS_BUILD_DIR}/PawPaw/build-qt.sh ${TARGET}
+  - bash ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-qt.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
-  - bash ${TRAVIS_BUILD_DIR}/PawPaw/build-jack.sh ${TARGET}
+  - bash ${TRAVIS_BUILD_DIR}/PawPaw/build-jack2.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
 
 before_deploy:
-  - bash ${TRAVIS_BUILD_DIR}/build-jack-helper.sh ${TARGET}
+  - bash ${TRAVIS_BUILD_DIR}/pack-jack2-version.sh ${TARGET}
 
 deploy:
   provider: releases
