@@ -48,6 +48,7 @@ script:
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/build-qt.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
   - rm -rf ${HOME}/PawPawBuilds/builds/win32/portaudio19-19.6.0
+  - rm -rf ${HOME}/PawPawBuilds/builds/win32/rtaudio-e03448bd15c1c34e842459939d755f5f89e880ed
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/build-jack.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
 
@@ -57,7 +58,7 @@ before_deploy:
 deploy:
   provider: releases
   api_key:
-    secure: "xKXvMWEvj92IsFINpGlYEJeidLRoTeLIwrWVO06UrNNVCPiWC9z64Xthx/0xqQEv+2PA5GLkh9lnTm7aqQKbMNiVj4sQCcg3sVXEhkGkr27KNjHuQiFao+IeotU6bVTObzGhNR+US3LkRK9RSSvnmDBSUQB16+YgG6PZyXH7mQfoLycQQ8z24hLc4P2gGXbgd23viqZVxBh15HBm8jSm0q5Y5JZ2D/ETQWIijv+Cd7f3Q4j989Q4ZULiDyPs6gMR6Klr85Z8iNXEZRCw/dJ800IrWV9tetJFZFVOG2nWATPSFD9L1DLlJtD0tPJjk/n7DpUEivdrrLgm2C1MaTfDWQU7OOktkcNv6oUB++hWqD/d9bj1teSu9lrUkAS4QPWGWgsMQH/eWquoS6vQOE7ERAHTDgbsS1aPxnuWyG2lyefbSEJCXBOpbcWLAfAr3cdkS+QhFHZzKvZLwJZFkKR0FEKKPkt+CViLmtSbeM7uFRhX3B4uA9EByZonlvupgKfyt/WKoqpsb1hF16tVrZOmTFf2/btLOw8PUD1opAx0aXjH+XcWH6y93wsP41E3VMO/gc8jc7npa+JsMDXaHFf/DMQvj9rVF8deHoshx8Sl3n0RpEhMyV+lXKKfewryqnfWNGak7wNQQhFr4Xqv6mleBFAX1Miy12KkzYxltfwi53o="
+    secure: "lKddChv//OAq99fc3Fy8oSDhp0XOay6JezUaTNbF8z/dtBfqLFkzMMjDG+kd7lFV9w64aajAx/GCOwGs/z4eiiaselRI0Q0hCnniC7nD19nrUPyVpjc2xyRQjL8Nn+UNAazAb1w06DYhNAzg/v2C7eqWhIbtaJfLPHtnWjCIHS+Cw65GGFVgZk8USyBitDF/x/Ng/I7snTrVp7pGVe5gSTXc9O9rIcBZwFSLDb4Ozdfg3W/g9fPQ+Xx9ZhwG3Unfm2f354+TN70BcGTfPiqnWjgU1Kl5inCVDCTj8TZZG0oMEzGMANHN6dk0LZJUvaMghxzTjeiwR9d+uCZ+QhtuzUwzlx0mzcS8W3wpsjlXDJFC/UKF4BxcpPv9rHVoHDBt6zfID+EjaHZXOY/TVMNoDscXv4nm5bTBzhyNXhPVQGEmlShWYSp5vgGC0yyQw1/ghehsi15n8f97kZd0LxJondsQ6PzmJ9YWTE5rhx20T6UD9owvxVj+NNm/EhDKOSgRoYaMxPTsJ1eeu9sKaVrTTINlOB8NF0doJX27Zw5LaQpRu+tjcaYPr8DAGQPlocBbM3OHMmv3fKLSKRgkwTO/+thTO9Yv7W03WoIHi0wvRMxwKFVlQPIuD/JbSt8LXpTYEcYW2AYnCY80En6cEzCNkiOYx6lkwcnt/QBax3h7jvk="
   file_glob: true
   file:
     - PawPaw/jack2/macosx/*.pkg
