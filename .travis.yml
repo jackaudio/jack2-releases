@@ -47,10 +47,7 @@ script:
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/build-qt.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
-  - rm -rf ${HOME}/PawPawBuilds/builds/win32/portaudio19-19.6.0
-  - rm -rf ${HOME}/PawPawBuilds/builds/win64/portaudio19-19.6.0
-  - rm -rf ${HOME}/PawPawBuilds/builds/win32/rtaudio-e03448bd15c1c34e842459939d755f5f89e880ed
-  - rm -rf ${HOME}/PawPawBuilds/builds/win64/rtaudio-e03448bd15c1c34e842459939d755f5f89e880ed
+  #- rm -f ${TRAVIS_BUILD_DIR}/PawPaw/targets/${TARGET}/lib/pkgconfig/jack.pc
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/build-jack.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
 
@@ -64,6 +61,5 @@ deploy:
   file_glob: true
   file:
     - PawPaw/jack2/macosx/*.pkg
-  skip_cleanup: true
   on:
     all_branches: true
