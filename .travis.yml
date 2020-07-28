@@ -60,6 +60,6 @@ deploy:
     secure: "lKddChv//OAq99fc3Fy8oSDhp0XOay6JezUaTNbF8z/dtBfqLFkzMMjDG+kd7lFV9w64aajAx/GCOwGs/z4eiiaselRI0Q0hCnniC7nD19nrUPyVpjc2xyRQjL8Nn+UNAazAb1w06DYhNAzg/v2C7eqWhIbtaJfLPHtnWjCIHS+Cw65GGFVgZk8USyBitDF/x/Ng/I7snTrVp7pGVe5gSTXc9O9rIcBZwFSLDb4Ozdfg3W/g9fPQ+Xx9ZhwG3Unfm2f354+TN70BcGTfPiqnWjgU1Kl5inCVDCTj8TZZG0oMEzGMANHN6dk0LZJUvaMghxzTjeiwR9d+uCZ+QhtuzUwzlx0mzcS8W3wpsjlXDJFC/UKF4BxcpPv9rHVoHDBt6zfID+EjaHZXOY/TVMNoDscXv4nm5bTBzhyNXhPVQGEmlShWYSp5vgGC0yyQw1/ghehsi15n8f97kZd0LxJondsQ6PzmJ9YWTE5rhx20T6UD9owvxVj+NNm/EhDKOSgRoYaMxPTsJ1eeu9sKaVrTTINlOB8NF0doJX27Zw5LaQpRu+tjcaYPr8DAGQPlocBbM3OHMmv3fKLSKRgkwTO/+thTO9Yv7W03WoIHi0wvRMxwKFVlQPIuD/JbSt8LXpTYEcYW2AYnCY80En6cEzCNkiOYx6lkwcnt/QBax3h7jvk="
   file_glob: true
   file:
-    - PawPaw/jack2/macosx/*.pkg
+    - PawPaw/jack2-macOS-*.tar.gz
   on:
     all_branches: true
