@@ -61,6 +61,6 @@ deploy:
   file_glob: true
   file:
     - PawPaw/jack2-macOS-*.tar.gz
-    - PawPaw/jack2/windows/inno/*.exe
+    - PawPaw/jack2-win*.exe
   on:
     all_branches: true
