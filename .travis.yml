@@ -49,8 +49,8 @@ script:
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
 
 before_deploy:
-  - rm -rf ${HOME}/PawPawBuilds/builds/${TARGET}/jack2-34fb7b6963864380cf1ab48fe575faed62afd2f0
-  - rm -rf ${HOME}/PawPawBuilds/builds/${TARGET}/qjackctl-0.6.2
+  #- rm -rf ${HOME}/PawPawBuilds/builds/${TARGET}/jack2-34fb7b6963864380cf1ab48fe575faed62afd2f0
+  #- rm -rf ${HOME}/PawPawBuilds/builds/${TARGET}/qjackctl-0.6.2
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/build-jack2.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/pack-jack2-version.sh ${TARGET}
 
