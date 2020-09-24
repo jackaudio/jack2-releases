@@ -13,4 +13,4 @@ if [ "${TARGET}" = "win32" ] || [ "${TARGET}" = "win64" ]; then
 fi
 
 sudo apt-get update -qq
-sudo apt-get install -y libc6 libc6:i386 libgcc-s1:i386
+sudo apt-get install -y libc6 libc6:i386 libc-dev-bin libc6-dev gcc-10-base:i386 libcrypt1:i386 libgcc-s1:i386
