@@ -14,7 +14,7 @@ if [ "$(ls ${HOME}/PawPawBuilds/debs | wc -l)" -ne 0 ]; then
 fi
 
 # common
-sudo apt-get install -y build-essential curl cmake jq mingw-w64 qttools5-dev-tools winehq-stable
+sudo apt-get install -y build-essential curl cmake jq llvm mingw-w64 qttools5-dev-tools winehq-stable
 
 # specific
 if [ "${TARGET}" = "win32" ]; then
