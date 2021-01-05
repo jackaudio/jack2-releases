@@ -15,7 +15,7 @@ cache:
 
 env:
   global:
-    - BOOTSTRAP_VERSION=1
+    - BOOTSTRAP_VERSION=2
 
 jobs:
   # linux with win32 cross-compilation
