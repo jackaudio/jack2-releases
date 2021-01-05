@@ -3,8 +3,8 @@
 set -e
 
 # Special macOS native handling
-if [ "${TARGET}" = "macos" ]; then
-    brew install cmake jq || true
+if [ "${TARGET}" = "macos" ] || [ "${TARGET}" = "macos-universal" ]; then
+    HOMEBREW_NO_AUTO_UPDATE=1 brew install cmake jq meson
     exit 0
 fi
 
