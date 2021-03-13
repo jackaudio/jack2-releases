@@ -10,6 +10,7 @@ cache:
     - ${HOME}/PawPawBuilds/debs
     - ${HOME}/PawPawBuilds/downloads
     - ${HOME}/PawPawBuilds/targets/macos
+    - ${HOME}/PawPawBuilds/targets/macos-universal
     - ${HOME}/PawPawBuilds/targets/win32
     - ${HOME}/PawPawBuilds/targets/win64
 
@@ -19,7 +20,8 @@ env:
 
 jobs:
   # linux with win32 cross-compilation
-  - os: linux
+  - name: "win32 cross-compiled"
+    os: linux
     compiler: gcc
     env:
       - TARGET="win32"
@@ -27,18 +29,27 @@ jobs:
       - xvfb
 
   # linux with win64 cross-compilation
-  - os: linux
+  - name: "win64 cross-compiled"
+    os: linux
     compiler: gcc
     env:
       - TARGET="win64"
     services:
       - xvfb
 
-  # macOS native build
-  - os: osx
-    compiler: gcc
+  # macOS native intel build
+  - name: "macOS native intel"
+    os: osx
+    osx_image: xcode9.4
     env:
       - TARGET="macos"
+
+  # macOS universal build
+  - name: "macOS universal"
+    os: osx
+    osx_image: xcode12.3
+    env:
+      - TARGET="macos-universal"
 
 before_install:
   - bash ${TRAVIS_BUILD_DIR}/.travis/before_install.sh

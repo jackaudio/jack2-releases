@@ -2,7 +2,8 @@
 
 set -e
 
-if [ "${TARGET}" = "macos" ]; then
+# Special macOS native handling
+if [ "${TARGET}" = "macos" ] || [ "${TARGET}" = "macos-universal" ]; then
     exit 0
 fi
 
