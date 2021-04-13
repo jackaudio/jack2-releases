@@ -58,6 +58,8 @@ install:
   - bash ${TRAVIS_BUILD_DIR}/.travis/install.sh
 
 script:
+  - rm -rf ${HOME}/PawPawBuilds/builds/win32/tre-6092368aabdd0dbb0fbceb2766a37b98e0ff6911
+  - rm -rf ${HOME}/PawPawBuilds/builds/win64/tre-6092368aabdd0dbb0fbceb2766a37b98e0ff6911
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-jack2.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-qt.sh ${TARGET}
