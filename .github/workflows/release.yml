@@ -82,7 +82,6 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: recursive
-    - uses: GabrielBB/xvfb-action@v1
     - name: Set up cache
       uses: actions/cache@v2
       with:
@@ -102,7 +101,7 @@ jobs:
         wget -qO- https://dl.winehq.org/wine-builds/winehq.key | sudo apt-key add - && \
         sudo dpkg --add-architecture i386 && \
         sudo apt-add-repository -y 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main' && \
-        sudo apt-get install -y autopoint build-essential curl cmake jq llvm mingw-w64 qttools5-dev-tools winehq-stable \
+        sudo apt-get install -y autopoint build-essential curl cmake jq llvm mingw-w64 qttools5-dev-tools winehq-stable xvfb \
           binutils-mingw-w64-i686 g++-mingw-w64-i686
     - name: Cache debian packages
       run: |
@@ -115,7 +114,7 @@ jobs:
     #- name: Build win32 cross-compiled
       #shell: bash
       #run: |
-        #./pack-jack2-version.sh win32
+        #xvfb-run ./pack-jack2-version.sh win32
     #- uses: actions/upload-artifact@v2
       #with:
         #name: win32 installer
@@ -128,7 +127,6 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: recursive
-    - uses: GabrielBB/xvfb-action@v1
     - name: Set up cache
       uses: actions/cache@v2
       with:
@@ -149,7 +147,7 @@ jobs:
         sudo dpkg --add-architecture i386 && \
         sudo apt-add-repository -y 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main' && \
         sudo apt-get update -qq && \
-        sudo apt-get install -y autopoint build-essential curl cmake jq llvm mingw-w64 qttools5-dev-tools winehq-stable \
+        sudo apt-get install -y autopoint build-essential curl cmake jq llvm mingw-w64 qttools5-dev-tools winehq-stable xvfb \
           binutils-mingw-w64-x86-64 g++-mingw-w64-x86-64
     - name: Cache debian packages
       run: |
@@ -162,7 +160,7 @@ jobs:
     #- name: Build win64 cross-compiled
       #shell: bash
       #run: |
-        #./pack-jack2-version.sh win64
+        #xvfb-run ./pack-jack2-version.sh win64
     #- uses: actions/upload-artifact@v2
       #with:
         #name: win64 installer
