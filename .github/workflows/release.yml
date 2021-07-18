@@ -62,6 +62,10 @@ jobs:
     - name: Set up dependencies
       run: |
         brew install cmake jq meson
+    - name: Fix up Xcode
+      run: |
+        sudo rm -Rf /Library/Developer/CommandLineTools/SDKs/*
+        sudo xcode-select -s "/Applications/Xcode_12.3.app"
     - name: Bootstrap macOS universal
       shell: bash
       run: |
