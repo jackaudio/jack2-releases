@@ -1,0 +1,167 @@
+name: release
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+env:
+  BOOTSTRAP_VERSION: 1
+  DEBIAN_FRONTEND: noninteractive
+  HOMEBREW_NO_AUTO_UPDATE: 1
+
+jobs:
+  # macOS native intel build
+  macos:
+    runs-on: macos-10.15
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Set up cache
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/PawPawBuilds/builds
+          ~/PawPawBuilds/downloads
+          ~/PawPawBuilds/targets
+        key: cache-macos
+    - name: Set up dependencies
+      run: |
+        brew install cmake jq meson
+    - name: Bootstrap macOS intel
+      shell: bash
+      run: |
+        ./PawPaw/bootstrap-jack2.sh macos && ./PawPaw/bootstrap-qt.sh macos && ./PawPaw/.cleanup.sh macos
+    - name: Build macOS intel
+      shell: bash
+      run: |
+        ./pack-jack2-version.sh macos
+    - uses: actions/upload-artifact@v2
+      with:
+        name: macOS intel package
+        path: PawPaw/jack2-macOS-*.tar.gz
+
+  # macOS native universal build
+  macos_universal:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Set up cache
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/PawPawBuilds/builds
+          ~/PawPawBuilds/downloads
+          ~/PawPawBuilds/targets
+        key: cache-macos-universal
+    - name: Set up dependencies
+      run: |
+        brew install cmake jq meson
+    - name: Bootstrap macOS universal
+      shell: bash
+      run: |
+        ./PawPaw/bootstrap-jack2.sh macos-universal && ./PawPaw/bootstrap-qt.sh macos-universal && ./PawPaw/.cleanup.sh macos-universal
+    - name: Build macOS universal
+      shell: bash
+      run: |
+        ./pack-jack2-version.sh macos-universal
+    - uses: actions/upload-artifact@v2
+      with:
+        name: macOS universal package
+        path: PawPaw/jack2-macOS-*.tar.gz
+
+  # linux with win32 cross-compilation
+  win32:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Set up cache
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/PawPawBuilds/builds
+          ~/PawPawBuilds/debs
+          ~/PawPawBuilds/downloads
+          ~/PawPawBuilds/targets
+        key: cache-win32
+    - name: Restore debian packages cache
+      run: |
+        if [ -d ~/PawPawBuilds/debs ] && [ "$(ls ~/PawPawBuilds/debs | wc -l)" -ne 0 ]; then \
+          sudo cp ~/PawPawBuilds/debs/*.deb /var/cache/apt/archives/; \
+        fi
+    - name: Set up dependencies
+      run: |
+        wget -qO- https://dl.winehq.org/wine-builds/winehq.key | sudo apt-key add - && \
+        sudo dpkg --add-architecture i386 && \
+        sudo apt-add-repository -y 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main' && \
+        sudo apt-get install -y autopoint build-essential curl cmake jq llvm mingw-w64 qttools5-dev-tools winehq-stable \
+          binutils-mingw-w64-i686 g++-mingw-w64-i686
+    - name: Cache debian packages
+      run: |
+        mkdir -p ~/PawPawBuilds/debs && \
+        sudo mv /var/cache/apt/archives/*.deb ~/PawPawBuilds/debs/
+    - name: Bootstrap win32 cross-compiled
+      shell: bash
+      run: |
+        ./PawPaw/bootstrap-jack2.sh win32 && ./PawPaw/bootstrap-qt.sh win32 && ./PawPaw/.cleanup.sh win32
+    - name: Build win32 cross-compiled
+      shell: bash
+      run: |
+        ./pack-jack2-version.sh win32
+    - uses: actions/upload-artifact@v2
+      with:
+        name: win32 installer
+        path: PawPaw/jack2-win*.exe
+
+  # linux with win64 cross-compilation
+  win64:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Set up cache
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/PawPawBuilds/builds
+          ~/PawPawBuilds/debs
+          ~/PawPawBuilds/downloads
+          ~/PawPawBuilds/targets
+        key: cache-win64
+    - name: Restore debian packages cache
+      run: |
+        if [ -d ~/PawPawBuilds/debs ] && [ "$(ls ~/PawPawBuilds/debs | wc -l)" -ne 0 ]; then \
+          sudo cp ~/PawPawBuilds/debs/*.deb /var/cache/apt/archives/; \
+        fi
+    - name: Set up dependencies
+      run: |
+        wget -qO- https://dl.winehq.org/wine-builds/winehq.key | sudo apt-key add - && \
+        sudo dpkg --add-architecture i386 && \
+        sudo apt-add-repository -y 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main' && \
+        sudo apt-get update -qq && \
+        sudo apt-get install -y autopoint build-essential curl cmake jq llvm mingw-w64 qttools5-dev-tools winehq-stable \
+          binutils-mingw-w64-x86-64 g++-mingw-w64-x86-64
+    - name: Cache debian packages
+      run: |
+        mkdir -p ~/PawPawBuilds/debs && \
+        sudo mv /var/cache/apt/archives/*.deb ~/PawPawBuilds/debs/
+    - name: Bootstrap win64 cross-compiled
+      shell: bash
+      run: |
+        ./PawPaw/bootstrap-jack2.sh win64 && ./PawPaw/bootstrap-qt.sh win64 && ./PawPaw/.cleanup.sh win64
+    - name: Build win64 cross-compiled
+      shell: bash
+      run: |
+        ./pack-jack2-version.sh win64
+    - uses: actions/upload-artifact@v2
+      with:
+        name: win64 installer
+        path: PawPaw/jack2-win*.exe
