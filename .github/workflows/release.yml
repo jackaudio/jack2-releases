@@ -35,13 +35,13 @@ jobs:
       shell: bash
       run: |
         ./PawPaw/bootstrap-jack2.sh macos && ./PawPaw/bootstrap-qt.sh macos && ./PawPaw/.cleanup.sh macos
-    - name: Build macOS intel
-      shell: bash
-      run: |
-        ./pack-jack2-version.sh macos
-    - name: Set sha8
-      id: slug
-      run: echo "::set-output name=sha8::$(echo ${{ github.sha }} | cut -c1-8)"
+    #- name: Build macOS intel
+      #shell: bash
+      #run: |
+        #./pack-jack2-version.sh macos
+    #- name: Set sha8
+      #id: slug
+      #run: echo "::set-output name=sha8::$(echo ${{ github.sha }} | cut -c1-8)"
     #- uses: actions/upload-artifact@v2
       #with:
         #name: jack2-macOS-intel-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
