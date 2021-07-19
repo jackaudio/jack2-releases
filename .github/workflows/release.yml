@@ -39,9 +39,12 @@ jobs:
       shell: bash
       run: |
         ./pack-jack2-version.sh macos
+    - name: Set sha8
+      id: slug
+      run: echo "::set-output name=sha8::$(echo ${{ github.sha }} | cut -c1-8)"
     #- uses: actions/upload-artifact@v2
       #with:
-        #name: jack2-macOS-intel-${{ github.event.pull_request.number || github.sha }}
+        #name: jack2-macOS-intel-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
         #path: PawPaw/jack2-macOS-*.tar.gz
 
   # macOS native universal build
@@ -74,9 +77,12 @@ jobs:
       shell: bash
       run: |
         ./pack-jack2-version.sh macos-universal
+    - name: Set sha8
+      id: slug
+      run: echo "::set-output name=sha8::$(echo ${{ github.sha }} | cut -c1-8)"
     - uses: actions/upload-artifact@v2
       with:
-        name: jack2-macOS-universal-${{ github.event.pull_request.number || github.sha }}
+        name: jack2-macOS-universal-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
         path: PawPaw/jack2-macOS-*.tar.gz
 
   # linux with win32 cross-compilation
@@ -119,9 +125,12 @@ jobs:
       shell: bash
       run: |
         xvfb-run ./pack-jack2-version.sh win32
+    - name: Set sha8
+      id: slug
+      run: echo "::set-output name=sha8::$(echo ${{ github.sha }} | cut -c1-8)"
     - uses: actions/upload-artifact@v2
       with:
-        name: jack2-win32-${{ github.event.pull_request.number || github.sha }}
+        name: jack2-win32-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
         path: PawPaw/jack2-win*.exe
 
   # linux with win64 cross-compilation
@@ -164,7 +173,10 @@ jobs:
       shell: bash
       run: |
         xvfb-run ./pack-jack2-version.sh win64
+    - name: Set sha8
+      id: slug
+      run: echo "::set-output name=sha8::$(echo ${{ github.sha }} | cut -c1-8)"
     - uses: actions/upload-artifact@v2
       with:
-        name: jack2-win64-${{ github.event.pull_request.number || github.sha }}
+        name: jack2-win64-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
         path: PawPaw/jack2-win*.exe
