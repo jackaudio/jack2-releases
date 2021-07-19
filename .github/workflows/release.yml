@@ -39,10 +39,10 @@ jobs:
       shell: bash
       run: |
         ./pack-jack2-version.sh macos
-    - uses: actions/upload-artifact@v2
-      with:
-        name: jack2-macOS-intel-${{ github.event.pull_request.number || github.sha }}
-        path: PawPaw/jack2-macOS-*.tar.gz
+    #- uses: actions/upload-artifact@v2
+      #with:
+        #name: jack2-macOS-intel-${{ github.event.pull_request.number || github.sha }}
+        #path: PawPaw/jack2-macOS-*.tar.gz
 
   # macOS native universal build
   macos_universal:
@@ -166,5 +166,5 @@ jobs:
         xvfb-run ./pack-jack2-version.sh win64
     - uses: actions/upload-artifact@v2
       with:
-        name: jack2-win32-${{ github.event.pull_request.number || github.sha }}
+        name: jack2-win64-${{ github.event.pull_request.number || github.sha }}
         path: PawPaw/jack2-win*.exe
