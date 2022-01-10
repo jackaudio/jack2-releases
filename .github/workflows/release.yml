@@ -34,17 +34,17 @@ jobs:
       shell: bash
       run: |
         ./PawPaw/bootstrap-jack2.sh macos && ./PawPaw/bootstrap-qt.sh macos && ./PawPaw/.cleanup.sh macos
-    #- name: Build macOS intel
-      #shell: bash
-      #run: |
-        #./pack-jack2-version.sh macos
-    #- name: Set sha8
-      #id: slug
-      #run: echo "::set-output name=sha8::$(echo ${{ github.sha }} | cut -c1-8)"
-    #- uses: actions/upload-artifact@v2
-      #with:
-        #name: jack2-macOS-intel-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
-        #path: PawPaw/jack2-macOS-*.tar.gz
+    - name: Build macOS intel
+      shell: bash
+      run: |
+        ./pack-jack2-version.sh macos
+    - name: Set sha8
+      id: slug
+      run: echo "::set-output name=sha8::$(echo ${{ github.sha }} | cut -c1-8)"
+    - uses: actions/upload-artifact@v2
+      with:
+        name: jack2-macOS-intel-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
+        path: PawPaw/jack2-macOS-*.tar.gz
 
   # macOS native universal build
   macos_universal:
@@ -70,17 +70,17 @@ jobs:
       shell: bash
       run: |
         ./PawPaw/bootstrap-jack2.sh macos-universal && ./PawPaw/bootstrap-qt.sh macos-universal && ./PawPaw/.cleanup.sh macos-universal
-    #- name: Build macOS universal
-      #shell: bash
-      #run: |
-        #./pack-jack2-version.sh macos-universal
-    #- name: Set sha8
-      #id: slug
-      #run: echo "::set-output name=sha8::$(echo ${{ github.sha }} | cut -c1-8)"
-    #- uses: actions/upload-artifact@v2
-      #with:
-        #name: jack2-macOS-universal-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
-        #path: PawPaw/jack2-macOS-*.tar.gz
+    - name: Build macOS universal
+      shell: bash
+      run: |
+        ./pack-jack2-version.sh macos-universal
+    - name: Set sha8
+      id: slug
+      run: echo "::set-output name=sha8::$(echo ${{ github.sha }} | cut -c1-8)"
+    - uses: actions/upload-artifact@v2
+      with:
+        name: jack2-macOS-universal-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
+        path: PawPaw/jack2-macOS-*.tar.gz
 
   # linux with win32 cross-compilation
   win32:
@@ -109,7 +109,7 @@ jobs:
       run: |
         sudo dpkg --add-architecture i386
         sudo apt-get update -qq
-        sudo apt-get install -y autopoint build-essential curl cmake jq llvm mingw-w64 qttools5-dev-tools xvfb \
+        sudo apt-get install -y autopoint build-essential curl cmake jq llvm mingw-w64 qttools5-dev qttools5-dev-tools xvfb \
           binutils-mingw-w64-i686 g++-mingw-w64-i686 mingw-w64 wine-stable:i386
     - name: Cache debian packages
       run: |
@@ -119,17 +119,17 @@ jobs:
       shell: bash
       run: |
         ./PawPaw/bootstrap-jack2.sh win32 && ./PawPaw/bootstrap-qt.sh win32 && ./PawPaw/.cleanup.sh win32
-    #- name: Build win32 cross-compiled
-      #shell: bash
-      #run: |
-        #xvfb-run ./pack-jack2-version.sh win32
-    #- name: Set sha8
-      #id: slug
-      #run: echo "::set-output name=sha8::$(echo ${{ github.sha }} | cut -c1-8)"
-    #- uses: actions/upload-artifact@v2
-      #with:
-        #name: jack2-win32-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
-        #path: PawPaw/jack2-win*.exe
+    - name: Build win32 cross-compiled
+      shell: bash
+      run: |
+        xvfb-run ./pack-jack2-version.sh win32
+    - name: Set sha8
+      id: slug
+      run: echo "::set-output name=sha8::$(echo ${{ github.sha }} | cut -c1-8)"
+    - uses: actions/upload-artifact@v2
+      with:
+        name: jack2-win32-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
+        path: PawPaw/jack2-win*.exe
 
   # linux with win64 cross-compilation
   win64:
@@ -158,7 +158,7 @@ jobs:
       run: |
         sudo dpkg --add-architecture i386
         sudo apt-get update -qq
-        sudo apt-get install -y autopoint build-essential curl cmake jq llvm mingw-w64 qttools5-dev-tools xvfb \
+        sudo apt-get install -y autopoint build-essential curl cmake jq llvm mingw-w64 qttools5-dev qttools5-dev-tools xvfb \
           binutils-mingw-w64-x86-64 g++-mingw-w64-x86-64 mingw-w64 wine-stable
     - name: Cache debian packages
       run: |
@@ -168,14 +168,14 @@ jobs:
       shell: bash
       run: |
         ./PawPaw/bootstrap-jack2.sh win64 && ./PawPaw/bootstrap-qt.sh win64 && ./PawPaw/.cleanup.sh win64
-    #- name: Build win64 cross-compiled
-      #shell: bash
-      #run: |
-        #xvfb-run ./pack-jack2-version.sh win64
-    #- name: Set sha8
-      #id: slug
-      #run: echo "::set-output name=sha8::$(echo ${{ github.sha }} | cut -c1-8)"
-    #- uses: actions/upload-artifact@v2
-      #with:
-        #name: jack2-win64-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
-        #path: PawPaw/jack2-win*.exe
+    - name: Build win64 cross-compiled
+      shell: bash
+      run: |
+        xvfb-run ./pack-jack2-version.sh win64
+    - name: Set sha8
+      id: slug
+      run: echo "::set-output name=sha8::$(echo ${{ github.sha }} | cut -c1-8)"
+    - uses: actions/upload-artifact@v2
+      with:
+        name: jack2-win64-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
+        path: PawPaw/jack2-win*.exe
