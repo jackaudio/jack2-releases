@@ -17,6 +17,12 @@ if [ -z "${target}" ]; then
 fi
 
 # ---------------------------------------------------------------------------------------------------------------------
+# clean builds
+
+rm -rf ~/PawPawBuilds/builds/*/jack2-${JACK2_VERSION}
+rm -rf ~/PawPawBuilds/builds/*/qjackctl-${QJACKCTL_VERSION}
+
+# ---------------------------------------------------------------------------------------------------------------------
 
 ./PawPaw/build-jack2.sh ${target}
 ./PawPaw/pack-jack2.sh ${target}
