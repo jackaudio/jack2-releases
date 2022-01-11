@@ -19,6 +19,7 @@ fi
 # ---------------------------------------------------------------------------------------------------------------------
 # clean builds
 
+rm -rf ~/PawPawBuilds/builds/*/jack-router-*
 rm -rf ~/PawPawBuilds/builds/*/jack2-${JACK2_VERSION}
 rm -rf ~/PawPawBuilds/builds/*/qjackctl-${QJACKCTL_VERSION}
 
