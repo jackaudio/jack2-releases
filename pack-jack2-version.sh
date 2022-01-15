@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export JACK2_VERSION=f2714777145c0fdc3069cbebfb613a55e4a59a45
+export JACK2_VERSION=v1.9.20
 export QJACKCTL_VERSION=0.9.6
 
 set -e
