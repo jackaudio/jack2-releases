@@ -8,10 +8,9 @@ on:
     branches:
       - '*'
 env:
-  CACHE_VERSION: 2
+  CACHE_VERSION: 3
   DEBIAN_FRONTEND: noninteractive
   HOMEBREW_NO_AUTO_UPDATE: 1
-  PAWPAW_SKIP_LTO: 1
 
 jobs:
   # macOS native intel build
