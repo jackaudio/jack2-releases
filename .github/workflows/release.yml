@@ -2,11 +2,7 @@ name: release
 
 on:
   push:
-    branches:
-      - '*'
-  pull_request:
-    branches:
-      - '*'
+
 env:
   CACHE_VERSION: 4
   DEBIAN_FRONTEND: noninteractive
@@ -45,6 +41,15 @@ jobs:
       with:
         name: jack2-macOS-intel-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
         path: PawPaw/jack2-macOS-*.tar.gz
+    - uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        tag_name: ${{ github.ref_name }}
+        name: ${{ github.ref_name }}
+        draft: false
+        prerelease: false
+        files: |
+          path: PawPaw/jack2-macOS-*.tar.gz
 
   # macOS native universal build
   macos_universal:
@@ -81,6 +86,15 @@ jobs:
       with:
         name: jack2-macOS-universal-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
         path: PawPaw/jack2-macOS-*.tar.gz
+    - uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        tag_name: ${{ github.ref_name }}
+        name: ${{ github.ref_name }}
+        draft: false
+        prerelease: false
+        files: |
+          path: PawPaw/jack2-macOS-*.tar.gz
 
   # linux with win32 cross-compilation
   win32:
@@ -130,6 +144,15 @@ jobs:
       with:
         name: jack2-win32-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
         path: PawPaw/jack2-win*.exe
+    - uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        tag_name: ${{ github.ref_name }}
+        name: ${{ github.ref_name }}
+        draft: false
+        prerelease: false
+        files: |
+          path: PawPaw/jack2-win*.exe
 
   # linux with win64 cross-compilation
   win64:
@@ -179,3 +202,12 @@ jobs:
       with:
         name: jack2-win64-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
         path: PawPaw/jack2-win*.exe
+    - uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        tag_name: ${{ github.ref_name }}
+        name: ${{ github.ref_name }}
+        draft: false
+        prerelease: false
+        files: |
+          path: PawPaw/jack2-win*.exe
