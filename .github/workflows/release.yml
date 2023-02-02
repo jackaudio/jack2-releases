@@ -4,9 +4,8 @@ on:
   push:
 
 env:
-  CACHE_VERSION: 4
+  CACHE_VERSION: 5
   DEBIAN_FRONTEND: noninteractive
-  HOMEBREW_NO_AUTO_UPDATE: 1
   PAWPAW_SKIP_LTO: 1
 
 jobs:
@@ -102,7 +101,7 @@ jobs:
 
   # linux with win32 cross-compilation
   win32:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v3
       with:
@@ -123,8 +122,8 @@ jobs:
       run: |
         sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list
         sudo apt-get update -qq
-        sudo apt-get install -yqq --allow-downgrades libgd3/focal libpcre2-8-0/focal libpcre2-16-0/focal libpcre2-32-0/focal libpcre2-posix2/focal
-        sudo apt-get purge -yqq libmono* moby* mono* php* libgdiplus libpcre2-posix3 libzip4
+        sudo apt-get install -yqq --allow-downgrades libgd3/jammy
+        sudo apt-get purge -yqq libmono* moby* mono* msbuild* php* libgdiplus libpcre2-posix3 nuget
     - name: Set up dependencies
       run: |
         sudo dpkg --add-architecture i386
@@ -163,7 +162,7 @@ jobs:
 
   # linux with win64 cross-compilation
   win64:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v3
       with:
@@ -184,8 +183,8 @@ jobs:
       run: |
         sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list
         sudo apt-get update -qq
-        sudo apt-get install -yqq --allow-downgrades libgd3/focal libpcre2-8-0/focal libpcre2-16-0/focal libpcre2-32-0/focal libpcre2-posix2/focal
-        sudo apt-get purge -yqq libmono* moby* mono* php* libgdiplus libpcre2-posix3 libzip4
+        sudo apt-get install -yqq --allow-downgrades libgd3/jammy
+        sudo apt-get purge -yqq libmono* moby* mono* msbuild* php* libgdiplus libpcre2-posix3 nuget
     - name: Set up dependencies
       run: |
         sudo dpkg --add-architecture i386
