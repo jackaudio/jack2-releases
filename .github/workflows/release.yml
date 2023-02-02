@@ -14,11 +14,12 @@ jobs:
   macos:
     runs-on: macos-10.15
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         submodules: recursive
     - name: Set up cache
-      uses: actions/cache@v2
+      uses: actions/cache@v3
+      id: cache
       with:
         path: |
           ~/PawPawBuilds
@@ -32,12 +33,13 @@ jobs:
         ./PawPaw/bootstrap-jack2.sh macos && ./PawPaw/bootstrap-qt.sh macos && ./PawPaw/.cleanup.sh macos
     - name: Build macOS intel
       shell: bash
+      if: steps.cache.outputs.cache-hit == 'true'
       run: |
         ./pack-jack2-version.sh macos
     - name: Set sha8
       id: slug
       run: echo "::set-output name=sha8::$(echo ${{ github.sha }} | cut -c1-8)"
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: jack2-macOS-intel-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
         path: PawPaw/jack2-macOS-*.tar.gz
@@ -55,11 +57,12 @@ jobs:
   macos_universal:
     runs-on: macos-10.15
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         submodules: recursive
     - name: Set up cache
-      uses: actions/cache@v2
+      uses: actions/cache@v3
+      id: cache
       with:
         path: |
           ~/PawPawBuilds
@@ -77,12 +80,13 @@ jobs:
         ./PawPaw/bootstrap-jack2.sh macos-universal && ./PawPaw/bootstrap-qt.sh macos-universal && ./PawPaw/.cleanup.sh macos-universal
     - name: Build macOS universal
       shell: bash
+      if: steps.cache.outputs.cache-hit == 'true'
       run: |
         ./pack-jack2-version.sh macos-universal
     - name: Set sha8
       id: slug
       run: echo "::set-output name=sha8::$(echo ${{ github.sha }} | cut -c1-8)"
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: jack2-macOS-universal-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
         path: PawPaw/jack2-macOS-*.tar.gz
@@ -100,11 +104,12 @@ jobs:
   win32:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         submodules: recursive
     - name: Set up cache
-      uses: actions/cache@v2
+      uses: actions/cache@v3
+      id: cache
       with:
         path: |
           ~/PawPawBuilds
@@ -136,12 +141,13 @@ jobs:
         ./PawPaw/bootstrap-jack2.sh win32 && ./PawPaw/bootstrap-qt.sh win32 && ./PawPaw/.cleanup.sh win32
     - name: Build win32 cross-compiled
       shell: bash
+      if: steps.cache.outputs.cache-hit == 'true'
       run: |
         xvfb-run ./pack-jack2-version.sh win32
     - name: Set sha8
       id: slug
       run: echo "::set-output name=sha8::$(echo ${{ github.sha }} | cut -c1-8)"
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: jack2-win32-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
         path: PawPaw/jack2-win*.exe
@@ -159,11 +165,12 @@ jobs:
   win64:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         submodules: recursive
     - name: Set up cache
-      uses: actions/cache@v2
+      uses: actions/cache@v3
+      id: cache
       with:
         path: |
           ~/PawPawBuilds
@@ -195,12 +202,13 @@ jobs:
         ./PawPaw/bootstrap-jack2.sh win64 && ./PawPaw/bootstrap-qt.sh win64 && ./PawPaw/.cleanup.sh win64
     - name: Build win64 cross-compiled
       shell: bash
+      if: steps.cache.outputs.cache-hit == 'true'
       run: |
         xvfb-run ./pack-jack2-version.sh win64
     - name: Set sha8
       id: slug
       run: echo "::set-output name=sha8::$(echo ${{ github.sha }} | cut -c1-8)"
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: jack2-win64-${{ github.event.pull_request.number || steps.slug.outputs.sha8 }}
         path: PawPaw/jack2-win*.exe
