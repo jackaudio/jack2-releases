@@ -129,7 +129,7 @@ jobs:
       run: |
         sudo dpkg --add-architecture i386
         sudo apt-get update -qq
-        sudo apt-get install -y autopoint build-essential curl cmake jq llvm mingw-w64 qttools5-dev qttools5-dev-tools xvfb \
+        sudo apt-get install -y autopoint build-essential curl cmake jq llvm meson mingw-w64 qttools5-dev qttools5-dev-tools xvfb \
           binutils-mingw-w64-i686 g++-mingw-w64-i686 mingw-w64 wine-stable:i386
     - name: Cache debian packages
       run: |
@@ -190,7 +190,7 @@ jobs:
       run: |
         sudo dpkg --add-architecture i386
         sudo apt-get update -qq
-        sudo apt-get install -y autopoint build-essential curl cmake jq llvm mingw-w64 qttools5-dev qttools5-dev-tools xvfb \
+        sudo apt-get install -y autopoint build-essential curl cmake jq llvm meson mingw-w64 qttools5-dev qttools5-dev-tools xvfb \
           binutils-mingw-w64-x86-64 g++-mingw-w64-x86-64 mingw-w64 wine-stable
     - name: Cache debian packages
       run: |
